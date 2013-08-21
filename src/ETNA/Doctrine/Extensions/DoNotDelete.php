@@ -4,7 +4,7 @@ namespace ETNA\Doctrine\Extensions;
 
 trait DoNotDelete {
     /**
-     * @Column(type="datetime", name="deleted_at")
+     * @Column(type="datetime", name="deleted_at", nullable=true)
      */
     private $deleted_at;
     
