@@ -1,0 +1,4 @@
+bin/behat
+bin/doctrine
+bin/doctrine.php
+vendor/

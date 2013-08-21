@@ -1,0 +1,39 @@
+{
+    "name": "etna/doctrine-extensions",
+    "description": "Doctrine Extensions",
+    "keywords": ["traits", "doctrine", "orm", "extensions"],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "ETNA",
+            "email": "dev@etna-alternance.net",
+            "homepage": "http://etna-alternance.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "doctrine/orm": "2.x@stable"
+    },
+    "require-dev": {
+        "behat/behat": "2.x@stable"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "ETNA\\Doctrine\\Extensions": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "repositories": [
+       {
+           "type": "composer",
+           "url": "http://composer.etna-alternance.net"
+       }
+   ]
+}
