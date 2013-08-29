@@ -2,7 +2,8 @@
 
 namespace ETNA\Doctrine\Extensions;
 
-trait CreatedAt {
+trait CreatedAt
+{
     /**
      * @Column(type="datetime", name="created_at")
      */

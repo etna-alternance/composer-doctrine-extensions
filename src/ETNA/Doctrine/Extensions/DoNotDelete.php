@@ -2,7 +2,8 @@
 
 namespace ETNA\Doctrine\Extensions;
 
-trait DoNotDelete {
+trait DoNotDelete
+{
     /**
      * @Column(type="datetime", name="deleted_at", nullable=true)
      */
