@@ -14,7 +14,12 @@ trait UpdatedAt
      */
     public function getUpdatedAt($format = null)
     {
-        if ($format === null || $this->updated_at === null) {
+        if (
+            $format              === null ||
+            $this->updated_at    === null ||
+            !is_object($this->updated_at) ||
+            get_class($this->updated_at)  !== 'DateTime'
+        ) {
             return $this->updated_at;
         }
         return $this->updated_at->format($format);

@@ -8,18 +8,23 @@ trait DoNotDelete
      * @Column(type="datetime", name="deleted_at", nullable=true)
      */
     private $deleted_at;
-    
+
     /**
      * Getter
      */
     public function getDeletedAt($format = null)
     {
-        if ($format === null || $this->deleted_at === null) {
+        if (
+            $format              === null ||
+            $this->deleted_at    === null ||
+            !is_object($this->deleted_at) ||
+            get_class($this->deleted_at)  !== 'DateTime'
+        ) {
             return $this->deleted_at;
         }
         return $this->deleted_at->format($format);
     }
-    
+
     /**
      * Setter
      */
@@ -37,7 +42,7 @@ trait DoNotDelete
         $this->deleted_at = new \DateTime($datetime);
         return $this;
     }
-    
+
     /**
      * @preRemove
      */
