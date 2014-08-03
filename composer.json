@@ -21,8 +21,8 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": {
-            "ETNA\\Doctrine\\Extensions": "src"
+        "psr-4": {
+            "ETNA\\Doctrine\\Extensions\\": "src"
         }
     },
     "extra": {
