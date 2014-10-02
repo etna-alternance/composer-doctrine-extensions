@@ -15,20 +15,27 @@
         "doctrine/orm": "2.x@stable"
     },
     "require-dev": {
-        "behat/behat": "2.x@stable"
+        "phpunit/phpunit": "4.2.*"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
         "psr-4": {
-            "ETNA\\Doctrine\\Extensions\\": "src"
+            "ETNA\\Doctrine\\Extensions\\": "src",
+            "Tests\\": "Tests"
         }
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
+    },
+    "scripts" : {
+        "post-install-cmd": [
+            "mkdir -p build",
+            "chmod 777 build"
+        ]
     },
     "repositories": [
        {

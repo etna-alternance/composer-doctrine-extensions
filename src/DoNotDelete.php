@@ -14,15 +14,16 @@ trait DoNotDelete
      */
     public function getDeletedAt($format = null)
     {
-        if (
-            $format              === null ||
-            $this->deleted_at    === null ||
-            !is_object($this->deleted_at) ||
-            get_class($this->deleted_at)  !== 'DateTime'
-        ) {
-            return $this->deleted_at;
+        switch (true) {
+            case is_object($this->deleted_at) && get_class($this->deleted_at) !== 'DateTime':
+                throw new \Exception("deleted_at is not a datetime", 400);
+            case $this->deleted_at === null:
+            case is_string($this->deleted_at):
+            case $format === null:
+                return $this->deleted_at;
+            default:
+                return $this->deleted_at->format($format);
         }
-        return $this->deleted_at->format($format);
     }
 
     /**
@@ -30,16 +31,14 @@ trait DoNotDelete
      */
     public function setDeletedAt($datetime)
     {
-        if ($datetime === null) {
-            $this->deleted_at = null;
-            return $this;
+        switch (true) {
+            case is_object($datetime) && get_class($datetime) !== 'DateTime':
+            case is_string($datetime) && !preg_match("#^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$#", trim($datetime)):
+                throw new \Exception("bad deleted_at provided", 400);
+            default:
+                $this->deleted_at = (is_object($datetime)) ? $datetime : new \DateTime($datetime);
         }
 
-        if (trim($datetime) == "" || !preg_match("#^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$#", $datetime)) {
-            throw new \Exception("Bad datetime format ({$datetime})", 400);
-        }
-
-        $this->deleted_at = new \DateTime($datetime);
         return $this;
     }
 

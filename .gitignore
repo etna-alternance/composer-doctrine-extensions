@@ -1,4 +1,5 @@
-bin/behat
+bin/phpunit
 bin/doctrine
 bin/doctrine.php
 vendor/
+build/
