@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project name="doctrine extensions" default="maintainability" basedir='.'>
+    <target name="maintainability"
+        depends="phploc, phpcs, phpcpd, phpmd, phpunit">
+    </target>
+     <target name="phploc">
+        <exec executable="./bin/phploc" passthru="true" checkreturn="true">
+            <arg path="src/"/>
+        </exec>
+    </target>
+    <target name="phpcs">
+        <exec executable="./bin/phpcs" passthru="true" checkreturn="true">
+            <arg value="-p"/>
+            <arg value="--standard=PSR2"/>
+            <arg path="src/"/>
+        </exec>
+    </target>
+    <target name="phpcpd">
+        <exec executable="./bin/phpcpd" passthru="true" checkreturn="true">
+            <arg value="--progress"/>
+            <arg path="src/"/>
+        </exec>
+    </target>
+    <target name="phpmd">
+        <exec executable="./bin/phpmd" passthru="true" checkreturn="true">
+            <arg path="src/"/>
+            <arg value="text"/>
+            <arg value="phpmd.xml"/>
+        </exec>
+    </target>
+    <target name="phpunit" description="Run phpunit test">
+        <exec executable="./bin/phpunit" passthru="true" checkreturn="true" />
+    </target>
+</project>

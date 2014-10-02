@@ -9,6 +9,7 @@ trait AutoIncrementID
      * @Column(type="integer", name="id")
      */
     protected $id;
+
     public function getId()
     {
         return $this->id;

@@ -14,10 +14,16 @@ trait UpdatedAt
      */
     public function getUpdatedAt($format = null)
     {
-        if ($format === null || $this->updated_at === null) {
-            return $this->updated_at;
+        switch (true) {
+            case is_string($this->updated_at):
+            case is_object($this->updated_at) && get_class($this->updated_at) !== 'DateTime':
+                throw new \Exception("updated_at is not a datetime", 400);
+            case $this->updated_at === null:
+            case $format === null:
+                return $this->updated_at;
+            default:
+                return $this->updated_at->format($format);
         }
-        return $this->updated_at->format($format);
     }
 
     /**
@@ -25,7 +31,7 @@ trait UpdatedAt
      */
     public function setUpdatedAtBeforePersist()
     {
-        $this->updated_at = new \DateTime("now");
+        $this->updated_at = new \DateTime(date('Y-m-d H:i:s'));
     }
 
     /**
@@ -33,6 +39,6 @@ trait UpdatedAt
      */
     public function setUpdatedAtBeforeUpdate()
     {
-        $this->updated_at = new \DateTime("now");
+        $this->updated_at = new \DateTime(date('Y-m-d H:i:s'));
     }
 }
