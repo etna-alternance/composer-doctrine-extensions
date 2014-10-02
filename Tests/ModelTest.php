@@ -98,9 +98,9 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      * @expectedException        Exception
      * @expectedExceptionMessage Cannot delete Tests\Model
      */
-    public function testExceptionOnDoNotDeleted()
+    public function testExceptionOnDocanDeleted()
     {
-        $this->model->doNotDelete();
+        $this->model->canNotDelete();
     }
 
     public function testSetCreatedAt()

@@ -1,5 +1,3 @@
-bin/phpunit
-bin/doctrine
-bin/doctrine.php
+bin/
 vendor/
 build/

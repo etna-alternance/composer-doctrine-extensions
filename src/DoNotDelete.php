@@ -45,7 +45,7 @@ trait DoNotDelete
     /**
      * @preRemove
      */
-    public function doNotDelete()
+    public function canNotDelete()
     {
         throw new \Exception("Cannot delete " . get_class($this));
     }

@@ -1,0 +1,16 @@
+image: etna/drone-php
+env:
+  - APPLICATION_ENV=drone
+script:
+  - composer install --dev --no-interaction --prefer-source
+  - bin/phing
+  - bin/coveralls
+notify:
+  slack:
+    team: {{slackTeam}}
+    channel: {{slackChannel}}
+    username: drone
+    token: {{slackToken}}
+    on_started: true
+    on_failure: true
+    on_success: true
