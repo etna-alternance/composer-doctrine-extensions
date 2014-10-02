@@ -15,10 +15,10 @@ trait DoNotDelete
     public function getDeletedAt($format = null)
     {
         switch (true) {
+            case is_string($this->deleted_at):
             case is_object($this->deleted_at) && get_class($this->deleted_at) !== 'DateTime':
                 throw new \Exception("deleted_at is not a datetime", 400);
             case $this->deleted_at === null:
-            case is_string($this->deleted_at):
             case $format === null:
                 return $this->deleted_at;
             default:

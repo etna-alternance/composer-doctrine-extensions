@@ -21,12 +21,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     public function testPopulatedEntity()
     {
-        // Vérification des Getter sur des strings
-        $this->model->populate($this->date);
-        $this->assertEquals($this->date, $this->model->getCreatedAt());
-        $this->assertEquals($this->date, $this->model->getUpdatedAt());
-        $this->assertEquals($this->date, $this->model->getDeletedAt());
-
         // Vérification des Getter sur des objects
         $this->model->populate($this->datetime);
         // Avec format
@@ -98,7 +92,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      * @expectedException        Exception
      * @expectedExceptionMessage Cannot delete Tests\Model
      */
-    public function testExceptionOnDocanDeleted()
+    public function testExceptionOncanNotDeleted()
     {
         $this->model->canNotDelete();
     }

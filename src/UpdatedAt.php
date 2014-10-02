@@ -15,10 +15,10 @@ trait UpdatedAt
     public function getUpdatedAt($format = null)
     {
         switch (true) {
+            case is_string($this->updated_at):
             case is_object($this->updated_at) && get_class($this->updated_at) !== 'DateTime':
                 throw new \Exception("updated_at is not a datetime", 400);
             case $this->updated_at === null:
-            case is_string($this->updated_at):
             case $format === null:
                 return $this->updated_at;
             default:
