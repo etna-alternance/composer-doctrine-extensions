@@ -2,6 +2,10 @@
 
 namespace ETNA\Doctrine\Extensions;
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+
 trait UpdatedAt
 {
     /**

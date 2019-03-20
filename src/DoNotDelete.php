@@ -2,6 +2,9 @@
 
 namespace ETNA\Doctrine\Extensions;
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\PreRemove;
+
 trait DoNotDelete
 {
     /**
@@ -43,7 +46,7 @@ trait DoNotDelete
     }
 
     /**
-     * @preRemove
+     * @PreRemove
      */
     public function canNotDelete()
     {
