@@ -1,4 +1,4 @@
 bin/
 tmp/
 vendor/
-composer.lock
+build/
