@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\Column;
 /**
  * Le trait qui ajoute à une entité un ID tout ce qu'il y'a de plus classique
  */
-trait UnsignedAutoIncrementID
+trait AutoIncrementID
 {
     /**
      * @var integer
