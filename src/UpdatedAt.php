@@ -35,13 +35,21 @@ trait UpdatedAt
      */
     public function setUpdatedAtBeforePersist()
     {
-        $this->updated_at = new \DateTime(date('Y-m-d H:i:s'));
+        $this->setUpdatedAt();
     }
 
     /**
      * @PreUpdate
      */
     public function setUpdatedAtBeforeUpdate()
+    {
+        $this->setUpdatedAt();
+    }
+
+    /**
+     * @Update
+     */
+    public function setUpdatedAt()
     {
         $this->updated_at = new \DateTime(date('Y-m-d H:i:s'));
     }
