@@ -31,23 +31,9 @@ trait UpdatedAt
     }
 
     /**
-     * @PrePersist
-     */
-    public function setUpdatedAtBeforePersist()
-    {
-        $this->setUpdatedAt();
-    }
-
-    /**
-     * @PreUpdate
-     */
-    public function setUpdatedAtBeforeUpdate()
-    {
-        $this->setUpdatedAt();
-    }
-
-    /**
      * @Update
+     * @PreUpdate
+     * @PrePersist
      */
     public function setUpdatedAt()
     {
