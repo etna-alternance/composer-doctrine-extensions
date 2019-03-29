@@ -7,15 +7,15 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Column;
 
 /**
- * Le trait qui ajoute à une entité un ID tout ce qu'il y'a de plus classique
+ * Le trait qui ajoute à une entité un ID tout ce qu'il y'a de plus classique, sauf que celui la est unsigned
  */
-trait AutoIncrementID
+trait UnsignedAutoIncrementID
 {
     /**
      * @var integer
      *
      * @Id @GeneratedValue
-     * @Column(type="integer", name="id")
+     * @Column(type="integer", name="id", options={"unsigned"=true})
      */
     protected $id;
 
