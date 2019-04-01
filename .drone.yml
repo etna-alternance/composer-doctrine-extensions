@@ -3,8 +3,8 @@ env:
   - APPLICATION_ENV=drone
 script:
   - composer install --dev --no-interaction --prefer-source
-  - bin/phing
-  - bin/coveralls
+  - composer phing
+  - composer coveralls
 notify:
   slack:
     team: {{slackTeam}}
