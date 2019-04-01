@@ -31,7 +31,6 @@ trait UpdatedAt
     }
 
     /**
-     * @Update
      * @PreUpdate
      * @PrePersist
      */
