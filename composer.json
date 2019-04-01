@@ -41,6 +41,7 @@
     },
     "scripts" : {
         "phing": "phing",
+        "coveralls": "coveralls",
         "post-install-cmd": [
             "mkdir -p build",
             "chmod 777 build"
