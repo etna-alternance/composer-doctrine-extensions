@@ -105,10 +105,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUpdatedAt()
     {
-        $this->model->setUpdatedAtBeforePersist();
-        $this->assertEquals(date('Y-m-d H:i:s'), $this->model->getUpdatedAt('Y-m-d H:i:s'));
-
-        $this->model->setUpdatedAtBeforeUpdate();
+        $this->model->setUpdatedAt();
         $this->assertEquals(date('Y-m-d H:i:s'), $this->model->getUpdatedAt('Y-m-d H:i:s'));
     }
 
