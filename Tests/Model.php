@@ -6,6 +6,7 @@ use ETNA\Doctrine\Extensions\AutoIncrementID;
 use ETNA\Doctrine\Extensions\CreatedAt;
 use ETNA\Doctrine\Extensions\UpdatedAt;
 use ETNA\Doctrine\Extensions\DoNotDelete;
+use ETNA\Doctrine\Extensions\SetProperties;
 
 /**
  * @Entity(repositoryClass="Tests\ModelRepository")
@@ -18,6 +19,24 @@ class Model implements \JsonSerializable
     use CreatedAt;
     use UpdatedAt;
     use DoNotDelete;
+    use SetProperties;
+
+    private $model_value;
+
+    public function __construct()
+    {
+        $this->model_value = '';
+    }
+
+    public function setModelValue($value)
+    {
+        $this->model_value = $value;
+    }
+
+    public function getModelValue()
+    {
+        return $this->model_value;
+    }
 
     public function populate($date)
     {

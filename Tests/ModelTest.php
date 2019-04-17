@@ -117,4 +117,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         // On récupère un objet
         $this->assertEquals($this->datetime, $this->model->getDeletedAt());
     }
+
+    public function testSetProperties()
+    {
+        $this->assertEquals($this->model->getModelValue(), '');
+        $this->model->setProperties(["model_value" => "super value"]);
+        $this->assertEquals($this->model->getModelValue(), "super value");
+    }
 }
