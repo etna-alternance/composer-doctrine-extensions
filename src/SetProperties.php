@@ -8,7 +8,7 @@ namespace ETNA\Doctrine\Extensions;
 trait SetProperties
 {
     /**
-     * Sette toute les valeurs d'un array associatif à $this
+     * Sette toute les valeurs d'un array associatif à $this.
      *
      * @param  array $request_data
      *
