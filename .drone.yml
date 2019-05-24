@@ -1,6 +1,8 @@
-image: etna/drone-php
+image: etna/drone-php7:php71
 env:
   - APPLICATION_ENV=drone
+  - COVERALLS_REPO_TOKEN=$$COVERALLS_TOKEN
+  - COVERALLS_SERVICE_NAME=drone.io
 script:
   - composer install --dev --no-interaction --prefer-source
   - composer phing
