@@ -2,9 +2,9 @@
 
 namespace Tests;
 
-class ModelTest extends \PHPUnit_Framework_TestCase
+class ModelTest extends \PHPUnit\Framework\TestCase
 {
-    public function __construct()
+    public function setUp()
     {
         $this->model    = new Model();
         $this->date     = date('Y-m-d H:i:s');
