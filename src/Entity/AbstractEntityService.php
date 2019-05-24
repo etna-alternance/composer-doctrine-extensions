@@ -20,7 +20,10 @@ abstract class AbstractEntityService
     }
 
     /**
-     * Undocumented function
+     * Filtre les champs de $datas qui correspondent à ceux de $entity en se basant sur les groupes de validations.
+     * Permet de scénariser les modifications d'entités grace aux groupes de validation.
+     *
+     * @see https://symfony.com/doc/current/validation/groups.html
      *
      * @param array $datas
      * @param array $validation_groups
