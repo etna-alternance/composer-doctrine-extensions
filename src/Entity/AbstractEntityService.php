@@ -25,9 +25,9 @@ abstract class AbstractEntityService
      *
      * @see https://symfony.com/doc/current/validation/groups.html
      *
-     * @param array $datas
-     * @param array $validation_groups
-     * @param mixed $entity
+     * @param array          $datas
+     * @param array          $validation_groups
+     * @param AbstractEntity $entity
      *
      * @return array
      */
