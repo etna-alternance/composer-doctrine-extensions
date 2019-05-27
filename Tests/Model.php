@@ -6,20 +6,19 @@ use ETNA\Doctrine\Extensions\AutoIncrementID;
 use ETNA\Doctrine\Extensions\CreatedAt;
 use ETNA\Doctrine\Extensions\UpdatedAt;
 use ETNA\Doctrine\Extensions\DoNotDelete;
-use ETNA\Doctrine\Extensions\SetProperties;
+use ETNA\Doctrine\Entity\AbstractEntity;
 
 /**
  * @Entity(repositoryClass="Tests\ModelRepository")
  * @Table(name="model")
  * @HasLifecycleCallbacks
  */
-class Model implements \JsonSerializable
+class Model extends AbstractEntity
 {
     use AutoIncrementID;
     use CreatedAt;
     use UpdatedAt;
     use DoNotDelete;
-    use SetProperties;
 
     private $model_value;
 
