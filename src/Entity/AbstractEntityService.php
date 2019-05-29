@@ -41,9 +41,13 @@ abstract class AbstractEntityService
         $all_fields                = array_keys($doctrine_field_metadata);
 
         foreach ($datas as $field_name => $data_value) {
-            $constraints             = array_shift($validation_field_metadata[$field_name]);
-            $field_validation_groups = array_keys($constraints->constraintsByGroup);
-            $is_field_concerned      = !empty(array_intersect($validation_groups, $field_validation_groups));
+            $is_field_concerned = false;
+
+            if (isset($validation_field_metadata[$field_name])) {
+                $constraints             = array_shift($validation_field_metadata[$field_name]);
+                $field_validation_groups = array_keys($constraints->constraintsByGroup);
+                $is_field_concerned      = !empty(array_intersect($validation_groups, $field_validation_groups));
+            }
 
             switch (true) {
                 // Si la data concerne un champ qui ne fait pas parti de l'entité, on passe
