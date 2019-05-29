@@ -42,6 +42,11 @@ class Model extends AbstractEntity
         $this->created_at = $this->updated_at = $this->deleted_at = $date;
     }
 
+    public function setCreatedAt(\DateTime $created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
     public function jsonSerialize()
     {
         return [
