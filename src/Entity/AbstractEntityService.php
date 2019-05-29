@@ -20,7 +20,9 @@ abstract class AbstractEntityService
     }
 
     /**
-     * Filtre les champs de $datas qui correspondent à ceux de $entity en se basant sur les groupes de validations.
+     * Filtre les champs directs (pas les jointures) de $datas, en fonction des groupes de validation
+     * Et rempli l'entité avec les données filtrées, et éventuellement re-typées.
+
      * Permet de scénariser les modifications d'entités grace aux groupes de validation.
      *
      * @see https://symfony.com/doc/current/validation/groups.html
@@ -31,20 +33,40 @@ abstract class AbstractEntityService
      *
      * @return array
      */
-    protected function filterDataByValidationGroups(array $datas, array $validation_groups, AbstractEntity $entity)
+    protected function setPropertiesToEntity(array $datas, array $validation_groups, AbstractEntity $entity)
     {
-        $entity_members_metadatas = $this->validator->getMetadataFor($entity)->members;
-        $filtered_datas           = [];
+        $filtered_datas            = [];
+        $validation_field_metadata = $this->validator->getMetadataFor($entity)->members;
+        $doctrine_field_metadata   = $this->em->getClassMetadata(get_class($entity))->fieldMappings;
+        $all_fields                = array_keys($doctrine_field_metadata);
 
-        foreach ($entity_members_metadatas as $field_name => $all_field_metadatas) {
-            $constraints             = array_shift($all_field_metadatas);
-            $field_validation_groups = array_keys($constraints->constraintsByGroup);
-            $is_field_concerned      = !empty(array_intersect($validation_groups, $field_validation_groups));
+        foreach ($datas as $field_name => $data_value) {
+            $is_field_concerned = false;
 
-            if ($is_field_concerned && isset($datas[$field_name])) {
-                $filtered_datas[$field_name] = $datas[$field_name];
+            if (isset($validation_field_metadata[$field_name])) {
+                $constraints             = array_shift($validation_field_metadata[$field_name]);
+                $field_validation_groups = array_keys($constraints->constraintsByGroup);
+                $is_field_concerned      = !empty(array_intersect($validation_groups, $field_validation_groups));
+            }
+
+            switch (true) {
+                // Si la data concerne un champ qui ne fait pas parti de l'entité, on passe
+                case !in_array($field_name, $all_fields) || !$is_field_concerned:
+                    break;
+                // Si la data concerne un champ date ou assimilé, et que c'est une string, on sette un DateTime
+                case 1 === preg_match(
+                    "#^(date|datetime|time)[a-z_]*$#",
+                    $doctrine_field_metadata[$field_name]["type"]
+                ) && is_string($data_value):
+                    $filtered_datas[$field_name] = new \DateTime($data_value);
+                    break;
+                // Sinon on sette tel quel
+                default:
+                    $filtered_datas[$field_name] = $data_value;
+                    break;
             }
         }
-        return $filtered_datas;
+
+        $entity->setProperties($filtered_datas);
     }
 }

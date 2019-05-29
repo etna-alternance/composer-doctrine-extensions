@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": ">=7.1",
-        "doctrine/orm": "2.x@stable"
+        "doctrine/orm": "2.x@stable",
+        "symfony/validator": "^4.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5",

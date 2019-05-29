@@ -124,4 +124,42 @@ class ModelTest extends \PHPUnit\Framework\TestCase
         $this->model->setProperties(["model_value" => "super value"]);
         $this->assertEquals($this->model->getModelValue(), "super value");
     }
+
+    public function testModelService()
+    {
+        $doctrine_fake_metas = new \stdClass();
+        $validation_fake_metas = new \stdClass();
+        $fake_constraints = new \stdClass();
+        $fake_constraints->constraintsByGroup = [
+            "create" => []
+        ];
+
+        $validation_fake_metas->members = [
+            "model_value" => [$fake_constraints],
+            "created_at"  => [$fake_constraints]
+        ];
+
+        $doctrine_fake_metas->fieldMappings = [
+            "model_value" => ["fieldName" => "model_value", "type" => "string"],
+            "created_at"  => ["fieldName" => "created_at",  "type" => "datetime"],
+            "updated_at"  => ["fieldName" => "updated_at",  "type" => "datetime"],
+            "deleted_at"  => ["fieldName" => "deleted_at",  "type" => "datetime"],
+        ];
+
+        $em = $this->createMock(\Doctrine\ORM\EntityManager::class);
+        $em->method('getClassMetadata')->willReturn($doctrine_fake_metas);
+        $validator = $this->createMock(\Symfony\Component\Validator\Validator\RecursiveValidator::class);
+        $validator->method('getMetadataFor')->willReturn($validation_fake_metas);
+        $model_service = new ModelService($em, $validator);
+
+        $model = $model_service->create([
+            'model_value'   => 'je suis une super valeur',
+            'useless_value' => 'mais moi je sers a rien',
+            'created_at'    => '2012-12-21 12:12:12',
+            'updated_at'    => 'j\'suis trop un hacker'
+        ]);
+
+        $this->assertEquals($model->getModelValue(), 'je suis une super valeur');
+        $this->assertEquals($model->getCreatedAt('Y-m-d H:i:s'), '2012-12-21 12:12:12');
+    }
 }
