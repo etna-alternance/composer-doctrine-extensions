@@ -9,7 +9,7 @@ trait CreatedAt
     /**
      * @ORM\Column(type="datetime", name="created_at")
      */
-    private $created_at;
+    protected $created_at;
 
     /**
      * Getter

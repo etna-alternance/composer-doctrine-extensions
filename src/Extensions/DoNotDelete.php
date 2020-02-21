@@ -9,7 +9,7 @@ trait DoNotDelete
     /**
      * @ORM\Column(type="datetime", name="deleted_at", nullable=true)
      */
-    private $deleted_at;
+    protected $deleted_at;
 
     /**
      * Getter
