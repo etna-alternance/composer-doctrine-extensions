@@ -2,13 +2,12 @@
 
 namespace ETNA\Doctrine\Extensions;
 
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping as ORM;
 
 trait CreatedAt
 {
     /**
-     * @Column(type="datetime", name="created_at")
+     * @ORM\Column(type="datetime", name="created_at")
      */
     private $created_at;
 
@@ -17,20 +16,11 @@ trait CreatedAt
      */
     public function getCreatedAt($format = null)
     {
-        switch (true) {
-            case is_string($this->created_at):
-            case is_object($this->created_at) && get_class($this->created_at) !== 'DateTime':
-                throw new \Exception("created_at is not a datetime", 400);
-            case $this->created_at === null:
-            case $format === null:
-                return $this->created_at;
-            default:
-                return $this->created_at->format($format);
-        }
+        return $this->getDateField('created_at', $format);
     }
 
     /**
-     * @PrePersist
+     * @ORM\PrePersist
      */
     public function setCreatedAtBeforePersist()
     {

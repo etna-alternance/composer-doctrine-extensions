@@ -2,14 +2,12 @@
 
 namespace ETNA\Doctrine\Extensions;
 
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\PrePersist;
-use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping as ORM;
 
 trait UpdatedAt
 {
     /**
-     * @Column(type="datetime", name="updated_at")
+     * @ORM\Column(type="datetime", name="updated_at")
      */
     private $updated_at;
 
@@ -18,21 +16,12 @@ trait UpdatedAt
      */
     public function getUpdatedAt($format = null)
     {
-        switch (true) {
-            case is_string($this->updated_at):
-            case is_object($this->updated_at) && get_class($this->updated_at) !== 'DateTime':
-                throw new \Exception("updated_at is not a datetime", 400);
-            case $this->updated_at === null:
-            case $format === null:
-                return $this->updated_at;
-            default:
-                return $this->updated_at->format($format);
-        }
+        return $this->getDateField('updated_at', $format);
     }
 
     /**
-     * @PreUpdate
-     * @PrePersist
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
      */
     public function setUpdatedAt()
     {

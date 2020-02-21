@@ -7,6 +7,7 @@ use ETNA\Doctrine\Extensions\CreatedAt;
 use ETNA\Doctrine\Extensions\UpdatedAt;
 use ETNA\Doctrine\Extensions\DoNotDelete;
 use ETNA\Doctrine\Entity\AbstractEntity;
+use ETNA\Doctrine\Extensions\GetSetDate;
 
 /**
  * @Entity(repositoryClass="Tests\ModelRepository")
@@ -19,6 +20,7 @@ class Model extends AbstractEntity
     use CreatedAt;
     use UpdatedAt;
     use DoNotDelete;
+    use GetSetDate;
 
     private $model_value;
 
