@@ -2,9 +2,7 @@
 
 namespace ETNA\Doctrine\Extensions;
 
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\GeneratedValue;
-use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Le trait qui ajoute à une entité un ID tout ce qu'il y'a de plus classique, sauf que celui la est unsigned
@@ -14,8 +12,9 @@ trait UnsignedAutoIncrementID
     /**
      * @var integer
      *
-     * @Id @GeneratedValue
-     * @Column(type="integer", name="id", options={"unsigned"=true})
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer", name="id", options={"unsigned"=true})
      */
     protected $id;
 
