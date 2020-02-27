@@ -52,9 +52,9 @@ trait GetSetDate
         switch (true) {
             case is_object($date) && 'DateTime' !== get_class($date):
             case is_string($date) && !preg_match("#^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$#", trim($date)):
-                throw new \Exception("bad deleted_at provided", 400);
+                throw new \Exception("bad {$field_name} provided", 400);
             default:
-                $this->deleted_at = $date instanceof \DateTime ? $date : new \DateTime($date);
+                $this->{$field_name} = $date instanceof \DateTime ? $date : new \DateTime($date);
         }
 
         return $this;
