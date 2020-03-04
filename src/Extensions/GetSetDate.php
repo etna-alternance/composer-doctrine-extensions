@@ -53,6 +53,9 @@ trait GetSetDate
             case is_object($date) && 'DateTime' !== get_class($date):
             case is_string($date) && !preg_match("#^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$#", trim($date)):
                 throw new \Exception("bad {$field_name} provided", 400);
+            case null === $date:
+                $this->{$field_name} = null;
+                break;
             default:
                 $this->{$field_name} = $date instanceof \DateTime ? $date : new \DateTime($date);
         }

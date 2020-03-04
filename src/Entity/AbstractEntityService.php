@@ -57,10 +57,8 @@ abstract class AbstractEntityService
                 case 1 === preg_match(
                     "#^(date|datetime|time)[a-z_]*$#",
                     $doctrine_field_metadata[$field_name]["type"]
-                ):
-                    if (is_string($data_value)) {
-                        $filtered_datas[$field_name] = new \DateTime($data_value);
-                    }
+                ) && is_string($data_value):
+                    $filtered_datas[$field_name] = new \DateTime($data_value);
                     break;
                 // Sinon on sette tel quel
                 default:
