@@ -38,7 +38,8 @@ abstract class AbstractEntityService
         $filtered_datas            = [];
         $validation_field_metadata = $this->validator->getMetadataFor($entity)->members;
         $doctrine_field_metadata   = $this->em->getClassMetadata(get_class($entity))->fieldMappings;
-        $all_fields                = array_keys($doctrine_field_metadata);
+        $doctrine_assoc_metadata   = $this->em->getClassMetadata(get_class($entity))->associationMappings;
+        $all_fields                = array_keys(array_merge($doctrine_field_metadata, $doctrine_assoc_metadata));
 
         foreach ($datas as $field_name => $data_value) {
             $is_field_concerned = false;
